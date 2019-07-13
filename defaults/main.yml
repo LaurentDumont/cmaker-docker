@@ -1,9 +1,9 @@
 ---
 # Variables used in the 'docker' role.
 
-DOCKER_VERSION: 5:18.09.6~3-0~debian-stretch
+DOCKER_VERSION: 5:18.09.7~3-0~debian-stretch
 DOCKER_COMPOSE_VERSION: 1.24.0
-PREREQUISITE_TOWER_PACKAGES: 
+PREREQUISITE_DOCKER_PACKAGES: 
   - apt-transport-https
   - ca-certificates
   - curl

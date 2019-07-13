@@ -1,7 +1,7 @@
 ---
 - name: Install required packages for Docker.
   apt:
-    name: "{{ PREREQUISITE_TOWER_PACKAGES }}"
+    name: "{{ PREREQUISITE_DOCKER_PACKAGES }}"
     update_cache: yes
 
 - name: Add Docker official GPG key.
