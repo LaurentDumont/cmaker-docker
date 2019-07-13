@@ -23,7 +23,3 @@
 - name: Install docker Python library
   pip:
     name: docker
-
-- include: install_docker.yml
-- include: install_docker_compose.yml
-- include: sudoless_docker.yml
