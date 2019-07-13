@@ -1,0 +1,29 @@
+---
+- name: Install required packages for Docker.
+  apt:
+    name: "{{ PREREQUISITE_DOCKER_PACKAGES }}"
+    update_cache: yes
+
+- name: Add Docker official GPG key.
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Install docker repository (stable).
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable
+
+- name: Install docker-ce.
+  apt:
+    name: docker-ce={{ DOCKER_VERSION }}
+    state: present
+    update_cache: yes
+
+# Install (docker) while ensuring the umask is 0022 (to ensure other users can use it)
+- name: Install docker Python library
+  pip:
+    name: docker
+
+- include: install_docker.yml
+- include: install_docker_compose.yml
+- include: sudoless_docker.yml
