@@ -12,14 +12,28 @@
 - name: Install docker repository (stable).
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable
+  when: ansible_distribution == 'Debian'
+
 
 - name: Install docker-ce.
   apt:
-    name: docker-ce={{ DOCKER_VERSION }}
+    name: docker-ce={{ DOCKER_VERSION_DEBIAN }}
     state: present
     update_cache: yes
+  when: ansible_distribution == 'Debian'
 
-# Install (docker) while ensuring the umask is 0022 (to ensure other users can use it)
+- name: Install docker repository (stable).
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install docker-ce.
+  apt:
+    name: docker-ce={{ DOCKER_VERSION_UBUNTU }}
+    state: present
+    update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Install docker Python library
   pip:
     name: docker
